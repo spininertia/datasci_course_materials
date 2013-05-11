@@ -2,11 +2,10 @@ import oauth2 as oauth
 import urllib2 as urllib
 
 # See Assignment 1 instructions or README for how to get these credentials
-access_token_key = "<Enter your access token key here>"
-access_token_secret = "<Enter your access token secret here>"
-
-consumer_key = "<Enter consumer key>"
-consumer_secret = "<Enter consumer secret>"
+access_token_key = "1419516774-YIoQI0KnEH8T3RXrHid8iFxkYNGVbpfcUUkpdM8" 
+access_token_secret = "xzewovsNJ0c0hJPr1Jg9Z28cUrFXxTCFsx8ZU6dcZw" 
+consumer_key = "fhI6bqjwocefDUPt58T35g"
+consumer_secret = "NhVKQeeckmcKlWqTpsMLM9lTHGJ1uAnuaB3JjvI3qHQ" 
 
 _debug = 0
 
@@ -17,7 +16,8 @@ signature_method_hmac_sha1 = oauth.SignatureMethod_HMAC_SHA1()
 
 http_method = "GET"
 
-
+proxy = {'http':'http://127.0.0.1:8087', 'https':'http://127.0.0.1:8087'}
+proxy_handler = urllib.ProxyHandler(proxy)
 http_handler  = urllib.HTTPHandler(debuglevel=_debug)
 https_handler = urllib.HTTPSHandler(debuglevel=_debug)
 
@@ -43,6 +43,8 @@ def twitterreq(url, method, parameters):
     url = req.to_url()
 
   opener = urllib.OpenerDirector()
+  opener = urllib.build_opener(proxy_handler)
+  urllib.install_opener(opener)
   opener.add_handler(http_handler)
   opener.add_handler(https_handler)
 
