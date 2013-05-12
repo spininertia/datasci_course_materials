@@ -16,7 +16,7 @@ signature_method_hmac_sha1 = oauth.SignatureMethod_HMAC_SHA1()
 
 http_method = "GET"
 
-proxy = {'http':'http://127.0.0.1:8087', 'https':'http://127.0.0.1:8087'}
+proxy = {'https':'http://127.0.0.1:8087'}
 proxy_handler = urllib.ProxyHandler(proxy)
 http_handler  = urllib.HTTPHandler(debuglevel=_debug)
 https_handler = urllib.HTTPSHandler(debuglevel=_debug)
@@ -43,8 +43,8 @@ def twitterreq(url, method, parameters):
     url = req.to_url()
 
   opener = urllib.OpenerDirector()
-  opener = urllib.build_opener(proxy_handler)
-  urllib.install_opener(opener)
+#  opener = urllib.build_opener(proxy_handler)
+#  urllib.install_opener(opener)
   opener.add_handler(http_handler)
   opener.add_handler(https_handler)
 
